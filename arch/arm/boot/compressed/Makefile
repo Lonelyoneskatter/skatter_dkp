@@ -29,11 +29,6 @@ AFLAGS_decompress.o += -Wa,-march=armv7-a$(plus_sec)
 AFLAGS_lib1funcs.o += -Wa,-march=armv7-a$(plus_sec)
 AFLAGS_ashldi3.o += -Wa,-march=armv7-a$(plus_sec)
 
-# Make sure we can use these during final link
-CFLAGS_misc.o += -ffat-lto-objects
-CFLAGS_decompress.o += -ffat-lto-objects
-CFLAGS_string.o += -ffat-lto-objects
-
 HEAD	= head.o
 OBJS	+= misc.o decompress.o
 ifeq ($(CONFIG_KERNEL_LZ4),y)

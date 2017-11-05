@@ -131,7 +131,7 @@ endif
 # ===========================================================================
 
 ifneq ($(strip $(lib-y) $(lib-m) $(lib-n) $(lib-)),)
-lib-target := $(obj)/lib-statics.o
+lib-target := $(obj)/lib.a
 endif
 
 ifneq ($(strip $(obj-y) $(obj-m) $(obj-n) $(obj-) $(subdir-m) $(lib-target)),)
