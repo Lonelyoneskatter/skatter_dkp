@@ -885,7 +885,7 @@ int __init msm_rpmrs_levels_init(struct msm_rpmrs_platform_data *data)
 static int __init msm_rpmrs_init(void)
 {
 	struct msm_rpm_iv_pair req;
-	int rc;
+	int rc = 0;
 
 	BUG_ON(!msm_rpmrs_levels);
 

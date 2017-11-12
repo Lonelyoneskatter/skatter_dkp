@@ -501,19 +501,24 @@ struct freq_work_struct {
 void acpuclk_enable_oc_freqs(unsigned int freq);
 
 static void do_enable_oc(struct work_struct *work) {
-	int ret;
+	int ret = 0;
 	struct cpufreq_policy new_policy;
 	struct freq_work_struct *fw =
 		container_of(work, struct freq_work_struct, work);
 	struct cpufreq_policy *policy = fw->policy;
 
 	acpuclk_enable_oc_freqs(policy->user_policy.max);
-	if (ret = cpufreq_get_policy(&new_policy, policy->cpu)) {
+
+	ret = cpufreq_get_policy(&new_policy, policy->cpu);
+	if (ret) {
 		printk(KERN_ERR "%s: can't get policy (%i)!\n", __func__, ret);
 		goto out;
 	}
+
 	policy->cpuinfo.max_freq = new_policy.max = policy->user_policy.max;
-	if (ret = __cpufreq_set_policy(policy, &new_policy))
+
+	ret = __cpufreq_set_policy(policy, &new_policy);
+	if (ret)
 		printk(KERN_ERR "%s: can't set policy (%i)!\n", __func__, ret);
 out:
 	kfree(work);
